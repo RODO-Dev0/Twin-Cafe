@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090603">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Twin Coffee · Erbil</title>
+<link rel="icon" href="data:image/x-icon;base64,AAABAAYAEBAAAAEAIABoBAAAZgAAACAgAAABACAAqBAAAM4EAAAwMAAAAQAgAKglAAB2FQAAQEAAAAEAIAAoQgAAHjsAAICAAAABACAAKAgBAEZ9AAAAAAAAAQAGAAAA" type="image/x-icon">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+Arabic:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#090603;--deep:#120D07;--card:#1A1108;--card-h:#22180A;
+  --border:rgba(194,158,102,.10);--border-h:rgba(194,158,102,.28);
+  --gold:#C89E62;--gold-l:#DFBA80;--cream:#F3E8D4;--cream-d:#C0AE97;
+  --muted:#6A5B48;--green:#25D366;--caramel:#8B5E2C;
+  --ff-d:'Cormorant Garamond',Georgia,serif;
+  --ff-b:'Outfit',system-ui,-apple-system,sans-serif;
+  --ff-a:'Noto Sans Arabic','Segoe UI',system-ui,sans-serif;
+  --hh:60px;--ease:.4s cubic-bezier(.25,.46,.45,.94);--bounce:.5s cubic-bezier(.34,1.56,.64,1);
+  --r:14px;--r-lg:22px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{font-size:16px;scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--ink);color:var(--cream);font-family:var(--ff-b);line-height:1.6;min-height:100vh;overflow-x:hidden}
+[lang="ar"] body,[lang="ku"] body{font-family:var(--ff-a)}
+img{display:block}button{font-family:inherit;cursor:pointer}a{text-decoration:none}
+/* HEADER */
+header{position:sticky;top:0;z-index:200;height:var(--hh);background:rgba(9,6,3,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 clamp(14px,4vw,40px);gap:10px}
+.logo{display:flex;align-items:center;gap:9px;flex-shrink:0;color:var(--cream)}
+.logo-icon{width:38px;height:38px;flex-shrink:0;border-radius:50%;background:linear-gradient(145deg,#6D4C41,#4E342E);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(93,64,55,.4)}
+.logo-icon img{width:28px;height:28px;object-fit:contain;border-radius:50%}
+.logo-text{display:flex;flex-direction:column;line-height:1}
+.logo-name{font-family:var(--ff-d);font-size:1.22rem;font-weight:600;letter-spacing:.01em;color:var(--cream)}
+.logo-sub{font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-family:var(--ff-b);margin-top:1px}
+.hdr-right{display:flex;align-items:center;gap:8px;margin-left:auto}
+.hours-pill{display:flex;align-items:center;gap:6px;font-size:.7rem;color:var(--gold);padding:6px 10px;border-radius:100px;border:1px solid rgba(194,158,102,.18);background:rgba(194,158,102,.04);transition:var(--ease);white-space:nowrap;flex-shrink:0;cursor:pointer}
+.hours-pill:hover{background:rgba(194,158,102,.1);border-color:var(--gold)}
+.h-dot{width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0;animation:pulse-g 2s ease-in-out infinite}
+@keyframes pulse-g{0%,100%{box-shadow:0 0 0 0 rgba(37,211,102,.5)}50%{box-shadow:0 0 0 5px rgba(37,211,102,0)}}
+.lang-sw{display:flex;gap:2px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:100px;padding:3px;flex-shrink:0}
+.lang-btn{background:none;border:none;color:var(--muted);font-size:.66rem;font-weight:600;letter-spacing:.04em;padding:4px 7px;border-radius:100px;transition:var(--ease);font-family:var(--ff-b)}
+.lang-btn.active{background:var(--gold);color:var(--ink)}
+.lang-btn:hover:not(.active){color:var(--cream)}
+.cart-btn{position:relative;background:none;border:1px solid var(--border);border-radius:100px;padding:7px 14px 7px 12px;display:flex;align-items:center;gap:7px;color:var(--cream);font-size:.8rem;font-weight:500;transition:var(--ease);flex-shrink:0}
+.cart-btn:hover{border-color:var(--gold);background:rgba(194,158,102,.07)}
+.cart-btn svg{width:15px;height:15px}
+.cart-badge{position:absolute;top:-7px;right:-7px;background:var(--gold);color:var(--ink);width:19px;height:19px;border-radius:50%;font-size:.6rem;font-weight:700;display:none;align-items:center;justify-content:center;animation:pop .3s var(--bounce)}
+.cart-badge.on{display:flex}
+@keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
+@media(max-width:479px){.logo-text,.h-text,.cart-label{display:none}.lang-btn{padding:4px 6px;font-size:.6rem}.cart-btn{padding:8px}}
+/* HERO */
+.hero{position:relative;height:calc(100svh - var(--hh));min-height:480px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;text-align:center;padding:40px 24px}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 90% 55% at 50% 68%,rgba(130,82,28,.18) 0%,transparent 70%),radial-gradient(ellipse 45% 35% at 18% 28%,rgba(70,42,14,.14) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 82% 75%,rgba(90,55,18,.1) 0%,transparent 65%)}
+.hero-c{position:relative;z-index:2}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:12px;font-size:.63rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;opacity:0;animation:fadeUp .7s ease forwards .3s}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';width:28px;height:1px;background:var(--gold);opacity:.45}
+.hero-title{font-family:var(--ff-d);font-size:clamp(3.5rem,13vw,11rem);font-weight:300;line-height:.88;letter-spacing:-.02em;color:var(--cream);opacity:0;animation:fadeUp 1s ease forwards .5s}
+.hero-title em{font-style:italic;color:var(--gold)}
+.hero-sub{font-family:var(--ff-d);font-size:clamp(1.4rem,4.5vw,3.2rem);font-weight:300;font-style:italic;color:var(--gold-l);margin:10px 0 28px;opacity:0;animation:fadeUp 1s ease forwards .7s}
+.hero-tag{font-size:.76rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:36px;opacity:0;animation:fadeUp .8s ease forwards .9s}
+.hero-acts{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeUp .8s ease forwards 1.1s}
+.btn-gold{background:var(--gold);color:var(--ink);border:none;padding:13px 28px;border-radius:100px;font-size:.86rem;font-weight:700;letter-spacing:.04em;display:inline-flex;align-items:center;gap:7px;transition:var(--ease);cursor:pointer}
+.btn-gold:hover{background:var(--gold-l);transform:translateY(-2px);box-shadow:0 10px 28px rgba(200,158,98,.35)}
+.btn-outline{background:none;color:var(--cream);border:1px solid rgba(243,232,212,.22);padding:12px 22px;border-radius:100px;font-size:.86rem;font-weight:500;display:inline-flex;align-items:center;gap:7px;transition:var(--ease);cursor:pointer}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+/* STEAM */
+.steam-wrap{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:280px;height:180px;pointer-events:none}
+.steam{position:absolute;bottom:0;width:2px;border-radius:50px;background:linear-gradient(to top,transparent 0%,rgba(194,158,102,.25) 40%,rgba(194,158,102,.08) 70%,transparent 100%);animation:steam-r linear infinite}
+.steam:nth-child(1){left:15%;height:100px;animation-duration:3.2s;animation-delay:0s}
+.steam:nth-child(2){left:32%;height:140px;animation-duration:4s;animation-delay:.6s}
+.steam:nth-child(3){left:50%;height:160px;animation-duration:3.5s;animation-delay:1.1s}
+.steam:nth-child(4){left:68%;height:120px;animation-duration:4.2s;animation-delay:.3s}
+.steam:nth-child(5){left:85%;height:95px;animation-duration:3.8s;animation-delay:1.6s}
+@keyframes steam-r{0%{transform:translateY(0) scaleX(1);opacity:0}12%{opacity:1}80%{opacity:.3}100%{transform:translateY(-150px) scaleX(2.8) translateX(18px);opacity:0}}
+.scroll-hint{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;opacity:0;animation:fadeIn 1s ease forwards 1.6s}
+.scroll-hint span{font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.scroll-line{width:1px;height:36px;background:linear-gradient(to bottom,var(--gold),transparent);animation:sc-line 1.8s ease-in-out infinite;transform-origin:top}
+@keyframes sc-line{0%{transform:scaleY(0);opacity:0}50%{opacity:1}100%{transform:scaleY(1);opacity:0}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+/* SECTION HEADER */
+.sec-hdr{text-align:center;margin-bottom:44px;padding:0 24px}
+.sec-label{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;display:block}
+.sec-title{font-family:var(--ff-d);font-size:clamp(1.9rem,4.5vw,3.2rem);font-weight:300;font-style:italic;color:var(--cream);line-height:1}
+/* CAT STRIP */
+.cat-strip{position:sticky;top:var(--hh);z-index:100;background:rgba(9,6,3,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:10px clamp(14px,4vw,40px);display:flex;gap:7px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.cat-strip::-webkit-scrollbar{display:none}
+.cat-btn{background:none;border:1px solid var(--border);color:var(--muted);padding:7px 18px;border-radius:100px;font-size:.76rem;font-weight:500;white-space:nowrap;flex-shrink:0;display:flex;align-items:center;gap:5px;transition:var(--ease);cursor:pointer}
+.cat-btn:hover{border-color:var(--gold);color:var(--cream)}
+.cat-btn.active{background:var(--gold);border-color:var(--gold);color:var(--ink);font-weight:700}
+/* MENU */
+.menu-sec{padding:72px 0 48px}
+.menu-wrap{padding:0 clamp(14px,4vw,40px);max-width:1440px;margin:0 auto}
+.cat-group{margin-bottom:60px;display:none}
+.cat-group.vis{display:block;animation:fadeUp .45s ease both}
+.cat-gh{font-family:var(--ff-d);font-size:1.7rem;font-weight:300;font-style:italic;color:var(--gold);margin-bottom:22px;margin-top:8px;display:flex;align-items:center;gap:14px}
+.cat-gh::after{content:'';flex:1;height:1px;background:var(--border)}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:16px}
+@media(max-width:480px){.menu-grid{grid-template-columns:1fr 1fr;gap:10px}}
+@media(max-width:340px){.menu-grid{grid-template-columns:1fr}}
+/* CARD */
+.m-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;cursor:pointer;transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease;display:flex;flex-direction:column;position:relative;opacity:0;transform:translateY(20px)}
+.m-card.revealed{opacity:1;transform:translateY(0);transition:opacity .6s ease,transform .6s ease,box-shadow .35s ease,border-color .35s ease}
+.m-card:hover{border-color:var(--border-h);transform:translateY(-6px);box-shadow:0 22px 44px rgba(0,0,0,.45),0 0 0 1px rgba(194,158,102,.08);background:var(--card-h)}
+.m-card:active{transform:translateY(-2px)}
+.card-img-w{overflow:hidden;position:relative;flex-shrink:0}
+.card-img{width:100%;height:185px;object-fit:cover;display:block;background:var(--deep);transition:transform .55s ease}
+.m-card:hover .card-img{transform:scale(1.06)}
+.card-img-fb{width:100%;height:185px;display:none;align-items:center;justify-content:center;font-size:3rem;background:var(--deep)}
+@media(max-width:480px){.card-img,.card-img-fb{height:130px}}
+.card-body{padding:15px;flex:1;display:flex;flex-direction:column}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:6px;margin-bottom:6px}
+.card-name{font-size:.93rem;font-weight:600;color:var(--cream);line-height:1.3;flex:1}
+@media(max-width:480px){.card-name{font-size:.8rem}}
+.card-price{font-family:var(--ff-d);font-size:.96rem;font-weight:600;color:var(--gold);white-space:nowrap;flex-shrink:0}
+.card-desc{font-size:.74rem;color:var(--muted);line-height:1.55;flex:1;margin-bottom:12px}
+@media(max-width:480px){.card-desc{display:none}}
+.card-add{background:none;border:1px solid var(--border);color:var(--cream);padding:9px;border-radius:10px;font-size:.74rem;font-weight:600;display:flex;align-items:center;justify-content:center;gap:5px;width:100%;transition:var(--ease)}
+.card-add:hover{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.card-add:active{transform:scale(.96)}
+/* CART DRAWER */
+.cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);z-index:400;opacity:0;pointer-events:none;transition:opacity .4s ease}
+.cart-overlay.on{opacity:1;pointer-events:all}
+.cart-drawer{position:fixed;top:0;right:0;bottom:0;width:min(460px,100vw);background:var(--deep);border-left:1px solid var(--border);z-index:401;display:flex;flex-direction:column;transform:translateX(105%);transition:transform .44s cubic-bezier(.25,.46,.45,.94);will-change:transform}
+.cart-drawer.on{transform:translateX(0)}
+[dir="rtl"] .cart-drawer{right:auto;left:0;border-left:none;border-right:1px solid var(--border);transform:translateX(-105%)}
+[dir="rtl"] .cart-drawer.on{transform:translateX(0)}
+.cart-hdr{display:flex;justify-content:space-between;align-items:center;padding:22px 22px 18px;border-bottom:1px solid var(--border);flex-shrink:0}
+.cart-t{font-family:var(--ff-d);font-size:1.5rem;font-weight:400;font-style:italic;color:var(--cream)}
+.x-btn{background:none;border:1px solid var(--border);color:var(--muted);width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:var(--ease)}
+.x-btn:hover{border-color:var(--cream);color:var(--cream)}
+.x-btn svg{width:14px;height:14px}
+.cart-body{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:10px}
+.cart-body::-webkit-scrollbar{width:4px}
+.cart-body::-webkit-scrollbar-thumb{background:var(--border-h);border-radius:2px}
+.cart-empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--muted);text-align:center}
+.empty-ico{font-size:2.8rem;opacity:.35}
+.cart-item{display:flex;align-items:center;gap:12px;padding:12px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);animation:slIn .3s ease}
+@keyframes slIn{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:translateX(0)}}
+.ci-img{width:52px;height:52px;border-radius:9px;object-fit:cover;background:var(--ink);flex-shrink:0}
+.ci-info{flex:1;min-width:0}
+.ci-name{font-size:.84rem;font-weight:600;color:var(--cream);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
+.ci-price{font-size:.73rem;color:var(--gold)}
+.qty-ctrl{display:flex;align-items:center;gap:7px}
+.qty-btn{background:none;border:1px solid var(--border);color:var(--cream);width:27px;height:27px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;line-height:1;transition:var(--ease)}
+.qty-btn:hover{border-color:var(--gold);color:var(--gold)}
+.qty-n{font-size:.86rem;font-weight:700;min-width:18px;text-align:center}
+.cart-ftr{padding:18px 22px 22px;border-top:1px solid var(--border);flex-shrink:0;display:none;flex-direction:column;gap:12px}
+.cart-ftr.on{display:flex}
+.total-row{display:flex;justify-content:space-between;align-items:center}
+.total-lbl{font-size:.7rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+.total-amt{font-family:var(--ff-d);font-size:1.6rem;font-weight:600;color:var(--gold)}
+.btn-wa{background:var(--green);color:#fff;border:none;padding:15px;border-radius:var(--r);font-size:.93rem;font-weight:700;display:flex;align-items:center;justify-content:center;gap:10px;transition:var(--ease);letter-spacing:.02em;cursor:pointer}
+.btn-wa:hover{background:#1db954;transform:translateY(-1px);box-shadow:0 8px 22px rgba(37,211,102,.3)}
+.btn-wa svg{width:22px;height:22px}
+.btn-clear{background:none;border:none;color:var(--muted);font-size:.7rem;text-align:center;transition:var(--ease);cursor:pointer}
+.btn-clear:hover{color:#d45}
+/* MODALS */
+.modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:500;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s ease}
+.modal-ov.on{opacity:1;pointer-events:all}
+.modal-box{background:var(--deep);border:1px solid var(--border);border-radius:var(--r-lg);padding:34px;max-width:420px;width:100%;position:relative;transform:translateY(16px) scale(.97);transition:transform .35s var(--bounce)}
+.modal-ov.on .modal-box{transform:none}
+.modal-box h2{font-family:var(--ff-d);font-size:1.9rem;font-weight:300;font-style:italic;color:var(--cream);margin-bottom:6px}
+.modal-sub{font-size:.63rem;color:var(--gold);letter-spacing:.18em;text-transform:uppercase;margin-bottom:26px;display:block}
+.hours-list{display:flex;flex-direction:column;gap:1px}
+.hrs-row{display:flex;justify-content:space-between;align-items:center;padding:11px 13px;border-radius:10px;transition:background .2s}
+.hrs-row:hover{background:var(--card)}
+.hrs-row.today{background:rgba(194,158,102,.07);border:1px solid rgba(194,158,102,.14)}
+.hrs-day{font-size:.82rem;color:var(--cream);font-weight:500;display:flex;align-items:center;gap:8px}
+.hrs-row.today .hrs-day{color:var(--gold);font-weight:600}
+.today-badge{font-size:.54rem;background:var(--gold);color:var(--ink);padding:2px 7px;border-radius:100px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.hrs-time{font-family:var(--ff-d);font-size:.93rem;color:var(--muted)}
+.hrs-row.today .hrs-time{color:var(--gold-l)}
+/* PRODUCT SHEET */
+.prod-modal{position:fixed;inset:0;background:rgba(0,0,0,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);z-index:500;display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s ease}
+@media(min-width:560px){.prod-modal{align-items:center;padding:24px}}
+.prod-modal.on{opacity:1;pointer-events:all}
+.prod-sheet{background:var(--deep);border:1px solid var(--border);border-radius:var(--r-lg) var(--r-lg) 0 0;width:100%;max-width:500px;overflow:hidden;transform:translateY(30px);transition:transform .4s var(--bounce);max-height:88vh;overflow-y:auto}
+@media(min-width:560px){.prod-sheet{border-radius:var(--r-lg);transform:scale(.95) translateY(16px)}}
+.prod-modal.on .prod-sheet{transform:none}
+.ps-img{width:100%;height:210px;object-fit:cover;display:block;background:var(--card)}
+.ps-body{padding:22px}
+.ps-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;gap:8px}
+.ps-name{font-family:var(--ff-d);font-size:1.7rem;font-weight:300;font-style:italic;color:var(--cream);line-height:1.1;flex:1}
+.ps-price{font-family:var(--ff-d);font-size:1.3rem;font-weight:600;color:var(--gold);white-space:nowrap}
+.ps-desc{font-size:.8rem;color:var(--muted);line-height:1.6;margin-bottom:20px}
+.ps-actions{display:flex;gap:9px;align-items:center}
+.ps-qty{display:flex;align-items:center;gap:9px;background:var(--card);border:1px solid var(--border);border-radius:11px;padding:8px 13px}
+.ps-qb{background:none;border:none;color:var(--gold);font-size:1.25rem;line-height:1;transition:opacity .2s;padding:0 2px;cursor:pointer}
+.ps-qb:hover{opacity:.6}
+.ps-qn{font-size:.93rem;font-weight:700;min-width:18px;text-align:center}
+.ps-add{flex:1;background:var(--gold);color:var(--ink);border:none;padding:13px;border-radius:11px;font-size:.86rem;font-weight:700;letter-spacing:.03em;transition:var(--ease);cursor:pointer}
+.ps-add:hover{background:var(--gold-l);transform:translateY(-1px)}
+/* REVIEWS */
+.reviews-sec{padding:56px 0 40px;border-top:1px solid var(--border)}
+.rev-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px;padding:30px clamp(14px,4vw,40px) 0}
+.rev-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:20px;transition:var(--ease);opacity:0;transform:translateY(16px)}
+.rev-card.revealed{opacity:1;transform:translateY(0);transition:opacity .6s ease,transform .6s ease,box-shadow .35s ease,border-color .35s ease}
+.rev-card:hover{border-color:var(--border-h);transform:translateY(-3px)}
+.rev-stars{color:var(--gold);font-size:.76rem;letter-spacing:2px;margin-bottom:9px}
+.rev-txt{font-size:.8rem;color:var(--cream-d);line-height:1.65;margin-bottom:13px;font-style:italic}
+.rev-auth{display:flex;align-items:center;gap:9px}
+.rev-av{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--caramel));display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:700;color:var(--ink);flex-shrink:0}
+.rev-name{font-size:.76rem;font-weight:600;color:var(--cream)}
+.rev-date{font-size:.66rem;color:var(--muted)}
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:44px clamp(14px,4vw,40px) 40px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:24px;margin-top:20px}
+.f-info{font-size:.74rem;color:var(--muted);margin-top:7px;line-height:1.65}
+.f-right{display:flex;flex-direction:column;align-items:flex-end;gap:14px}
+[dir="rtl"] .f-right{align-items:flex-start}
+.soc-links{display:flex;gap:8px}
+.soc-a{width:38px;height:38px;border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--caramel);transition:var(--ease);background:none;cursor:pointer}
+.soc-a:hover{border-color:var(--gold);color:var(--gold);background:rgba(194,158,102,.07)}
+.soc-a svg{width:17px;height:17px}
+.f-copy{font-size:.64rem;color:var(--muted);opacity:.55}
+/* TOAST */
+.toast-c{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:900;display:flex;flex-direction:column;align-items:center;gap:7px;pointer-events:none}
+.toast{background:var(--card);border:1px solid var(--border-h);color:var(--cream);padding:11px 22px;border-radius:100px;font-size:.8rem;font-weight:500;white-space:nowrap;animation:t-in .4s var(--bounce) forwards;box-shadow:0 8px 28px rgba(0,0,0,.45)}
+.toast.out{animation:t-out .3s ease forwards}
+@keyframes t-in{from{opacity:0;transform:translateY(14px) scale(.9)}to{opacity:1;transform:none}}
+@keyframes t-out{from{opacity:1;transform:none}to{opacity:0;transform:translateY(-8px) scale(.94)}}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a class="logo" href="#" aria-label="Twin Coffee">
+    <div class="logo-icon">
+      <svg width="24" height="24" viewBox="0 0 40 40" fill="none">
+        <path d="M7.5 14.5h25l-3 17H10.5l-3-17z" fill="#C89E62" opacity=".9"/>
+        <path d="M32.5 18c2.5 0 5 .8 5 3.2s-2.5 3.3-5 2.8" stroke="#C89E62" stroke-width="1.9" stroke-linecap="round"/>
+        <path d="M13.5 9.5c0-2 1.5-2 1.5-4" stroke="#C89E62" stroke-width="1.5" stroke-linecap="round" opacity=".55"/>
+        <path d="M19.5 8.5c0-2 1.5-2 1.5-4" stroke="#C89E62" stroke-width="1.5" stroke-linecap="round" opacity=".75"/>
+        <path d="M25.5 9.5c0-2 1.5-2 1.5-4" stroke="#C89E62" stroke-width="1.5" stroke-linecap="round" opacity=".55"/>
+      </svg>
+    </div>
+    <div class="logo-text">
+      <span class="logo-name">Twin Coffee</span>
+      <span class="logo-sub" data-i18n="erbil_sub">Erbil, Kurdistan</span>
+    </div>
+  </a>
+  <div class="hdr-right">
+    <button class="hours-pill" id="hoursBtn">
+      <span class="h-dot"></span>
+      <span class="h-text" data-i18n="open_now">Open</span>
+    </button>
+    <div class="lang-sw" role="group">
+      <button class="lang-btn active" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="ar">ع</button>
+      <button class="lang-btn" data-lang="ku">کو</button>
+    </div>
+    <button class="cart-btn" id="cartBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span class="cart-label" data-i18n="order">Order</span>
+      <span class="cart-badge" id="cartBadge">0</span>
+    </button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="steam-wrap"><div class="steam"></div><div class="steam"></div><div class="steam"></div><div class="steam"></div><div class="steam"></div></div>
+  <div class="hero-c">
+    <div class="hero-eyebrow"><span data-i18n="est">Est. 2024</span><span>—</span><span data-i18n="erbil">Erbil, Kurdistan</span></div>
+    <h1 class="hero-title">Twin<br><em>Coffee</em></h1>
+    <p class="hero-sub" data-i18n="hero_sub">Specialty Café</p>
+    <p class="hero-tag" data-i18n="hero_tag">Where every cup tells a story</p>
+    <div class="hero-acts">
+      <a class="btn-gold" href="#menu"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg><span data-i18n="explore">Explore Menu</span></a>
+      <button class="btn-outline" id="hoursBtn2"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-i18n="hours_btn">Opening Hours</span></button>
+    </div>
+  </div>
+  <div class="scroll-hint"><span data-i18n="scroll">scroll</span><div class="scroll-line"></div></div>
+</section>
+
+<!-- MENU -->
+<div id="menu"><section class="menu-sec"><div class="sec-hdr"><span class="sec-label" data-i18n="menu_label">Our Offerings</span><h2 class="sec-title" data-i18n="menu_title">The Menu</h2></div></section></div>
+<div class="cat-strip" id="catStrip">
+  <button class="cat-btn active" data-cat="all">☕ <span data-i18n="cat_all">All</span></button>
+  <button class="cat-btn" data-cat="hot">🔥 <span data-i18n="cat_hot">Hot Coffee</span></button>
+  <button class="cat-btn" data-cat="cold">🧊 <span data-i18n="cat_cold">Cold Coffee</span></button>
+  <button class="cat-btn" data-cat="nc">🍵 <span data-i18n="cat_nc">Non-Coffee</span></button>
+  <button class="cat-btn" data-cat="food">🥐 <span data-i18n="cat_food">Food</span></button>
+</div>
+<div class="menu-wrap" id="menuWrap"></div>
+
+<!-- REVIEWS -->
+<section class="reviews-sec">
+  <div class="sec-hdr"><span class="sec-label">4.9 ★★★★★ · Google Reviews</span><h2 class="sec-title" data-i18n="rev_title">What People Say</h2></div>
+  <div class="rev-grid" id="revGrid"></div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div style="display:flex;align-items:center;gap:9px">
+      <div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(145deg,#6D4C41,#4E342E);display:flex;align-items:center;justify-content:center">
+        <svg width="18" height="18" viewBox="0 0 40 40" fill="none"><path d="M7.5 14.5h25l-3 17H10.5l-3-17z" fill="#C89E62" opacity=".9"/><path d="M32.5 18c2.5 0 5 .8 5 3.2s-2.5 3.3-5 2.8" stroke="#C89E62" stroke-width="1.9" stroke-linecap="round"/><path d="M13.5 9.5c0-2 1.5-2 1.5-4M19.5 8.5c0-2 1.5-2 1.5-4M25.5 9.5c0-2 1.5-2 1.5-4" stroke="#C89E62" stroke-width="1.5" stroke-linecap="round" opacity=".65"/></svg>
+      </div>
+      <div><div style="font-family:var(--ff-d);font-size:1rem;font-weight:600;color:var(--cream)">Twin Coffee</div><div style="font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)" data-i18n="erbil_sub">Erbil, Kurdistan</div></div>
+    </div>
+    <p class="f-info" data-i18n="f_addr">📍 Erbil, Kurdistan Region, Iraq</p>
+  </div>
+  <div class="f-right">
+    <div class="soc-links">
+      <a href="#" class="soc-a" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+      <a href="#" class="soc-a" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+      <button class="soc-a" id="waFooter" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></button>
+      <button class="soc-a" id="fHoursBtn" aria-label="Opening hours"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></button>
+    </div>
+    <p class="f-copy">© 2024 Twin Coffee. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- CART DRAWER -->
+<div class="cart-overlay" id="cartOv"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-hdr"><h2 class="cart-t" data-i18n="your_order">Your Order</h2><button class="x-btn" id="cartClose"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+  <div class="cart-body" id="cartBody"><div class="cart-empty" id="cartEmpty"><div class="empty-ico">☕</div><p data-i18n="cart_empty">Your order is empty</p><p style="font-size:.7rem;opacity:.55;margin-top:2px" data-i18n="cart_empty_s">Add something from the menu</p></div></div>
+  <div class="cart-ftr" id="cartFtr">
+    <div class="total-row"><span class="total-lbl" data-i18n="total">Total</span><span class="total-amt" id="cartTotal">0 IQD</span></div>
+    <button class="btn-wa" id="checkoutBtn">
+      <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      <span data-i18n="order_wa">Order via WhatsApp</span>
+    </button>
+    <button class="btn-clear" id="clearBtn" data-i18n="clear_order">Clear order</button>
+  </div>
+</div>
+
+<!-- HOURS MODAL -->
+<div class="modal-ov" id="hoursModal">
+  <div class="modal-box">
+    <button class="x-btn" id="hoursClose" style="position:absolute;top:18px;right:18px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    <h2 data-i18n="opening_hrs">Opening Hours</h2>
+    <span class="modal-sub" data-i18n="tc_erbil">Twin Coffee · Erbil</span>
+    <div class="hours-list" id="hoursList"></div>
+  </div>
+</div>
+
+<!-- PRODUCT MODAL -->
+<div class="prod-modal" id="prodModal">
+  <div class="prod-sheet">
+    <img class="ps-img" id="psImg" src="" alt="">
+    <div class="ps-body">
+      <div class="ps-top"><h3 class="ps-name" id="psName"></h3><div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px"><span class="ps-price" id="psPrice"></span><button class="x-btn" id="prodClose"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div></div>
+      <p class="ps-desc" id="psDesc"></p>
+      <div class="ps-actions">
+        <div class="ps-qty"><button class="ps-qb" id="qDec">−</button><span class="ps-qn" id="qNum">1</span><button class="ps-qb" id="qInc">+</button></div>
+        <button class="ps-add" id="psAdd" data-i18n="add_order">Add to Order</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST CONTAINER -->
+<div class="toast-c" id="toastC"></div>
+
+<script>
+// ═══════════════════════════════════════════
+// CONFIG
+const CFG={wa:'9647501234567',name:'Twin Coffee',city:'Erbil'};
+
+// ═══════════════════════════════════════════
+// i18n
+const L={
+  en:{erbil_sub:'Erbil, Kurdistan',open_now:'Open',order:'Order',explore:'Explore Menu',hours_btn:'Opening Hours',scroll:'scroll',menu_label:'Our Offerings',menu_title:'The Menu',cat_all:'All',cat_hot:'Hot Coffee',cat_cold:'Cold Coffee',cat_nc:'Non-Coffee',cat_food:'Food',rev_title:'What People Say',f_addr:'📍 Erbil, Kurdistan Region, Iraq',your_order:'Your Order',cart_empty:'Your order is empty',cart_empty_s:'Add something from the menu',total:'Total',order_wa:'Order via WhatsApp',clear_order:'Clear order',opening_hrs:'Opening Hours',tc_erbil:'Twin Coffee · Erbil',add_order:'Add to Order',est:'Est. 2024',erbil:'Erbil, Kurdistan',hero_sub:'Specialty Café',hero_tag:'Where every cup tells a story',today_b:'Today',days:['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],cat_labels:{hot:'Hot Coffee',cold:'Cold Coffee',nc:'Non-Coffee',food:'Food'}},
+  ar:{erbil_sub:'أربيل، كردستان',open_now:'مفتوح',order:'طلب',explore:'استعرض القائمة',hours_btn:'ساعات العمل',scroll:'تمرير',menu_label:'عروضنا',menu_title:'القائمة',cat_all:'الكل',cat_hot:'قهوة ساخنة',cat_cold:'قهوة باردة',cat_nc:'بدون قهوة',cat_food:'طعام',rev_title:'ما يقوله الناس',f_addr:'📍 أربيل، إقليم كردستان، العراق',your_order:'طلبك',cart_empty:'طلبك فارغ',cart_empty_s:'أضف عناصر من القائمة',total:'المجموع',order_wa:'الطلب عبر واتساب',clear_order:'مسح الطلب',opening_hrs:'ساعات العمل',tc_erbil:'تووين كوفي · أربيل',add_order:'أضف للطلب',est:'تأسست ٢٠٢٤',erbil:'أربيل، كردستان',hero_sub:'مقهى متخصص',hero_tag:'حيث كل كوب يحكي قصة',today_b:'اليوم',days:['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'],cat_labels:{hot:'قهوة ساخنة',cold:'قهوة باردة',nc:'بدون قهوة',food:'طعام'}},
+  ku:{erbil_sub:'هەولێر، کوردستان',open_now:'کراوەیە',order:'فەرمایش',explore:'لیستەکە ببینە',hours_btn:'کاتی کردنەوە',scroll:'بەردەوامبە',menu_label:'پێشکەشکراوەکانمان',menu_title:'لیستی خواردن',cat_all:'هەمووی',cat_hot:'قاوەی گەرم',cat_cold:'قاوەی سارد',cat_nc:'بێ قاوە',cat_food:'خواردن',rev_title:'نیازی خەڵک',f_addr:'📍 هەولێر، هەرێمی کوردستان، عێراق',your_order:'فەرمایشتەکەت',cart_empty:'فەرمایشتەکەت بەتاڵە',cart_empty_s:'لە لیستەکە شتەکان زیاد بکە',total:'کۆی گشتی',order_wa:'فەرمایش لە ڕێگای واتساپ',clear_order:'لابردنی فەرمایش',opening_hrs:'کاتی کردنەوە',tc_erbil:'تووین کۆفی · هەولێر',add_order:'زیادکردن بۆ فەرمایش',est:'داڕێژراوە ٢٠٢٤',erbil:'هەولێر، کوردستان',hero_sub:'مەیخانەی تایبەتی',hero_tag:'ئەوێ هەر جاڕ قسەی خۆی هەیە',today_b:'ئەمڕۆ',days:['یەکشەممە','دووشەممە','سێشەممە','چوارشەممە','پێنجشەممە','هەینی','شەممە'],cat_labels:{hot:'قاوەی گەرم',cold:'قاوەی سارد',nc:'بێ قاوە',food:'خواردن'}}
+};
+
+// ═══════════════════════════════════════════
+// MENU DATA
+const MENU={
+  hot:[
+    {id:1,name:{en:'Espresso',ar:'إسبريسو',ku:'ئێسپریسۆ'},desc:{en:'Pure single-origin shot, concentrated & bold',ar:'جرعة إسبريسو نقية من مصدر واحد',ku:'جرعەی پاکی ئێسپریسۆ'},price:2500,img:'https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=600&q=80',e:'☕'},
+    {id:2,name:{en:'Americano',ar:'أمريكانو',ku:'ئەمریکانۆ'},desc:{en:'Espresso with hot water — smooth and full',ar:'إسبريسو مع ماء ساخن، ناعم وكامل',ku:'ئێسپریسۆ لەگەڵ ئاوی گەرم'},price:3000,img:'https://images.unsplash.com/photo-1562547256-2c5ee93b60b7?w=600&q=80',e:'☕'},
+    {id:3,name:{en:'Cappuccino',ar:'كابتشينو',ku:'کاپۆچینۆ'},desc:{en:'Espresso, steamed milk and velvety foam',ar:'إسبريسو مع حليب مبخر ورغوة مخملية',ku:'ئێسپریسۆ لەگەڵ شیری گەرمکراو'},price:3500,img:'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=600&q=80',e:'☕'},
+    {id:4,name:{en:'Latte',ar:'لاتيه',ku:'لاتێ'},desc:{en:'Smooth espresso drowned in silky steamed milk',ar:'إسبريسو ناعم مغمور بالحليب الحريري',ku:'ئێسپریسۆی نیان لەگەڵ شیری نەرم'},price:3500,img:'https://images.unsplash.com/photo-1585494156145-1c60a4fe952b?w=600&q=80',e:'☕'},
+    {id:5,name:{en:'Flat White',ar:'فلات وايت',ku:'فلات وایت'},desc:{en:'Ristretto with microfoam — intense & creamy',ar:'ريستريتو مع ميكروفوم، كثيف وكريمي',ku:'ریستریتۆ لەگەڵ میکرۆفۆم'},price:4000,img:'https://images.unsplash.com/photo-1511920170033-f8396924c348?w=600&q=80',e:'☕'},
+    {id:6,name:{en:'Turkish Coffee',ar:'القهوة التركية',ku:'قاوەی تورکی'},desc:{en:'Traditional slow-brewed, rich and aromatic',ar:'مطبوخة ببطء تقليدي، غنية وعطرة',ku:'تەمەنی کلتووری، دارایەوە'},price:2000,img:'https://images.unsplash.com/photo-1578374173705-969cbe6f2d6b?w=600&q=80',e:'🫖'}
+  ],
+  cold:[
+    {id:7,name:{en:'Iced Latte',ar:'آيس لاتيه',ku:'ئایس لاتێ'},desc:{en:'Cold espresso over ice with fresh whole milk',ar:'إسبريسو بارد على الثلج مع الحليب الطازج',ku:'ئێسپریسۆی سارد لەسەر بەفر'},price:4000,img:'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=600&q=80',e:'🧊'},
+    {id:8,name:{en:'Cold Brew',ar:'كولد برو',ku:'کۆڵد بریو'},desc:{en:'18-hour cold steeped, ultra smooth and deep',ar:'منقوع بارد 18 ساعة، ناعم للغاية وعميق',ku:'١٨ کاتژمێر نووسراوە سارد'},price:4500,img:'https://images.unsplash.com/photo-1530695440407-21fef47230b1?w=600&q=80',e:'🧊'},
+    {id:9,name:{en:'Iced Cappuccino',ar:'آيس كابتشينو',ku:'ئایس کاپۆچینۆ'},desc:{en:'Chilled cappuccino with ice and fresh foam',ar:'كابتشينو مبرد مع الثلج والرغوة الطازجة',ku:'کاپۆچینۆی سارد لەگەڵ بەفر'},price:4000,img:'https://images.unsplash.com/photo-1578374173705-969cbe6f2d6b?w=600&q=80',e:'🧊'},
+    {id:10,name:{en:'Frappé',ar:'فرابيه',ku:'فراپێ'},desc:{en:'Blended coffee, cream & ice — pure indulgence',ar:'قهوة مخلوطة مع الكريمة والثلج',ku:'قاوەی تێکهاتوو لەگەڵ کریم و بەفر'},price:5000,img:'https://images.unsplash.com/photo-1625772452859-1c03d884dcd7?w=600&q=80',e:'🧋'},
+    {id:11,name:{en:'Iced Americano',ar:'آيس أمريكانو',ku:'ئایس ئەمریکانۆ'},desc:{en:'Bold espresso over ice, clean and refreshing',ar:'إسبريسو جريء على الثلج، نظيف ومنعش',ku:'ئێسپریسۆی تووند لەسەر بەفر'},price:3500,img:'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&q=80',e:'🧊'}
+  ],
+  nc:[
+    {id:12,name:{en:'Matcha Latte',ar:'ماتشا لاتيه',ku:'ماتچا لاتێ'},desc:{en:'Ceremonial grade matcha, earthy and creamy',ar:'ماتشا درجة الاحتفال، ترابي وكريمي',ku:'ماتچای ئایینی، کریمی و خاکی'},price:4500,img:'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?w=600&q=80',e:'🍵'},
+    {id:13,name:{en:'Chai Latte',ar:'شاي لاتيه',ku:'چای لاتێ'},desc:{en:'Aromatic spiced chai with hot steamed milk',ar:'مزيج شاي متبل مع حليب مبخر ساخن',ku:'چای ئاڵاوی لەگەڵ شیری گەرم'},price:3500,img:'https://images.unsplash.com/photo-1561047029-3000c68339ca?w=600&q=80',e:'🍵'},
+    {id:14,name:{en:'Hot Chocolate',ar:'شوكولاتة ساخنة',ku:'چکلاتەی گەرم'},desc:{en:'Belgian dark chocolate, velvet smooth',ar:'شوكولاتة بلجيكية داكنة، مخملية ناعمة',ku:'چکلاتەی بەلجیکی تاریک'},price:3500,img:'https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?w=600&q=80',e:'🍫'},
+    {id:15,name:{en:'Fresh Mint Tea',ar:'شاي نعناع طازج',ku:'چای نێنەی تازە'},desc:{en:'Garden-fresh mint, honey and a squeeze of lemon',ar:'نعناع طازج مع العسل والليمون',ku:'نێنەی تازە لەگەڵ هەنگوین و لیمۆ'},price:2500,img:'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=600&q=80',e:'🌿'}
+  ],
+  food:[
+    {id:16,name:{en:'Butter Croissant',ar:'كرواسون بالزبدة',ku:'کرواسانی کڕێم'},desc:{en:'Freshly baked, flaky golden layers',ar:'طازج من الفرن، طبقات مقرمشة ذهبية',ku:'تازە لە تەندووری، قاتی زێرین'},price:3000,img:'https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600&q=80',e:'🥐'},
+    {id:17,name:{en:'Classic Cheesecake',ar:'تشيزكيك كلاسيك',ku:'چیزکێکی کلاسیک'},desc:{en:'NY-style cream cheese on a buttered graham crust',ar:'على الطريقة النيويوركية، جبن كريمي',ku:'شێوازی نیویۆرک، جبنی چریی'},price:4500,img:'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=600&q=80',e:'🍰'},
+    {id:18,name:{en:'Chocolate Cake',ar:'كيك الشوكولاتة',ku:'کێکی چکلاتە'},desc:{en:'Triple layers of dark chocolate ganache',ar:'ثلاث طبقات غاناش شوكولاتة داكنة',ku:'سێ قات گاناشی چکلاتەی تاریک'},price:4000,img:'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&q=80',e:'🍫'},
+    {id:19,name:{en:'Club Sandwich',ar:'كلوب ساندويتش',ku:'کلەب ساندوێچ'},desc:{en:'Triple decker chicken, fresh veggies and aioli',ar:'ثلاثي الطوابق مع دجاج وخضار وصلصة',ku:'سێ قات لەگەڵ مریشک و سەوزە'},price:6000,img:'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=600&q=80',e:'🥪'},
+    {id:20,name:{en:'Waffles & Cream',ar:'وافل مع كريمة',ku:'وافڵ و کریم'},desc:{en:'Belgian waffles, fresh whipped cream & berries',ar:'وافل بلجيكي مع كريمة مخفوقة وتوت',ku:'وافڵی بەلجیکی لەگەڵ کریم و توو'},price:5500,img:'https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=600&q=80',e:'🧇'}
+  ]
+};
+
+// HOURS
+const HOURS=[
+  {day:0,o:'7:30 AM',c:'12:00 AM'},{day:1,o:'7:30 AM',c:'12:00 AM'},
+  {day:2,o:'7:30 AM',c:'12:00 AM'},{day:3,o:'7:30 AM',c:'12:00 AM'},
+  {day:4,o:'7:30 AM',c:'12:00 AM'},{day:5,o:'3:00 PM',c:'12:00 AM'},
+  {day:6,o:'7:30 AM',c:'12:00 AM'}
+];
+
+// REVIEWS
+const REVIEWS=[
+  {name:'Sara A.',i:'SA',text:'Best café in Erbil, hands down. The flat white is absolute perfection and the atmosphere is stunning. A must-visit every week.',stars:5,date:'April 2024'},
+  {name:'Karwan H.',i:'KH',text:'Cold brew here is on another level. You can tell they take the craft seriously. I come every morning before work without fail.',stars:5,date:'March 2024'},
+  {name:'Zara M.',i:'ZM',text:'Beautiful space, incredible coffee, and the cheesecake is genuinely out of this world. Great staff and amazing service too!',stars:5,date:'May 2024'},
+  {name:'Ahmad T.',i:'AT',text:'The matcha latte almost converted me away from coffee. Almost. The ambiance is warm and the quality is consistently top tier.',stars:5,date:'April 2024'}
+];
+
+// ═══════════════════════════════════════════
+// STATE
+let cart=[],lang='en',activeCat='all',curProduct=null,curQty=1;
+const $=id=>document.getElementById(id);
+
+// LANG
+function setLang(l){
+  lang=l;
+  const html=document.documentElement;
+  html.lang=l;html.dir=(l==='ar'||l==='ku')?'rtl':'ltr';html.dataset.lang=l;
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const k=el.dataset.i18n;if(L[l][k]!==undefined)el.textContent=L[l][k];
+  });
+  renderMenu();renderHours();renderCart();
+}
+
+// MENU
+function renderMenu(){
+  const wrap=$('menuWrap');wrap.innerHTML='';
+  Object.keys(MENU).forEach(cat=>{
+    const grp=document.createElement('div');
+    grp.className='menu-wrap cat-group'+(activeCat==='all'||activeCat===cat?' vis':'');
+    grp.dataset.cat=cat;
+    const label=L[lang].cat_labels[cat];
+    grp.innerHTML=`<h3 class="cat-gh">${label}</h3><div class="menu-grid" id="g-${cat}"></div>`;
+    wrap.appendChild(grp);
+    const grid=grp.querySelector('.menu-grid');
+    MENU[cat].forEach((item,i)=>grid.appendChild(buildCard(item,i)));
+  });
+  setTimeout(()=>{
+    document.querySelectorAll('.m-card').forEach((c,i)=>{
+      setTimeout(()=>c.classList.add('revealed'),i*35);
+    });
+  },60);
+}
+
+function buildCard(item){
+  const card=document.createElement('div');
+  card.className='m-card';
+  const n=item.name[lang]||item.name.en;
+  const d=item.desc[lang]||item.desc.en;
+  const addL=L[lang].add_order||'Add to Order';
+  card.innerHTML=`
+    <div class="card-img-w">
+      <img class="card-img" src="${item.img}" alt="${n}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="card-img-fb">${item.e}</div>
+    </div>
+    <div class="card-body">
+      <div class="card-top">
+        <span class="card-name">${n}</span>
+        <span class="card-price">${item.price.toLocaleString()} IQD</span>
+      </div>
+      <p class="card-desc">${d}</p>
+      <button class="card-add">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        ${addL}
+      </button>
+    </div>`;
+  card.addEventListener('click',e=>{if(!e.target.closest('.card-add'))openProduct(item)});
+  card.querySelector('.card-add').addEventListener('click',e=>{e.stopPropagation();addToCart(item,1)});
+  return card;
+}
+
+function filterCat(cat){
+  activeCat=cat;
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.toggle('active',b.dataset.cat===cat));
+  document.querySelectorAll('.cat-group').forEach(g=>{
+    const show=cat==='all'||g.dataset.cat===cat;
+    if(show){g.style.display='block';g.classList.remove('vis');void g.offsetWidth;g.classList.add('vis')}
+    else{g.style.display='none'}
+  });
+}
+
+// CART
+function addToCart(item,qty=1){
+  const ex=cart.find(c=>c.id===item.id);
+  ex?(ex.qty+=qty):cart.push({...item,qty});
+  updateBadge();renderCart();
+  toast(`${item.e} ${item.name[lang]||item.name.en} added`);
+  const cb=$('cartBtn');cb.style.borderColor='var(--gold)';setTimeout(()=>cb.style.borderColor='',700);
+}
+function chQty(id,d){
+  const it=cart.find(c=>c.id===id);if(!it)return;
+  it.qty+=d;if(it.qty<=0)cart=cart.filter(c=>c.id!==id);
+  updateBadge();renderCart();
+}
+function clearCart(){cart=[];updateBadge();renderCart()}
+function updateBadge(){
+  const t=cart.reduce((s,i)=>s+i.qty,0);
+  $('cartBadge').textContent=t;
+  $('cartBadge').classList.toggle('on',t>0);
+}
+function renderCart(){
+  const body=$('cartBody'),ftr=$('cartFtr'),emp=$('cartEmpty');
+  if(cart.length===0){
+    body.innerHTML='';body.appendChild(emp);
+    ftr.classList.remove('on');return;
+  }
+  emp.remove();
+  body.innerHTML=cart.map(item=>{
+    const n=item.name[lang]||item.name.en;
+    const sub=(item.price*item.qty).toLocaleString();
+    return`<div class="cart-item">
+      <img class="ci-img" src="${item.img}" alt="${n}" onerror="this.style.display='none'">
+      <div class="ci-info"><div class="ci-name">${n}</div><div class="ci-price">${sub} IQD</div></div>
+      <div class="qty-ctrl">
+        <button class="qty-btn" onclick="chQty(${item.id},-1)">−</button>
+        <span class="qty-n">${item.qty}</span>
+        <button class="qty-btn" onclick="chQty(${item.id},1)">+</button>
+      </div>
+    </div>`;
+  }).join('');
+  const total=cart.reduce((s,i)=>s+i.price*i.qty,0);
+  $('cartTotal').textContent=`${total.toLocaleString()} IQD`;
+  ftr.classList.add('on');
+}
+
+// CHECKOUT — beautiful WhatsApp message
+function checkout(){
+  if(cart.length===0){toast('🛒 '+(L[lang].cart_empty||'Your order is empty'));return}
+  const lines=cart.map(i=>{
+    const n=i.name.en;
+    return`• ${n} × ${i.qty}  →  ${(i.price*i.qty).toLocaleString()} IQD`;
+  });
+  const total=cart.reduce((s,i)=>s+i.price*i.qty,0);
+  const divider='─────────────────────';
+  const msg=[
+    `☕ *ORDER — Twin Coffee, Erbil*`,divider,
+    ...lines,divider,
+    `💰 *Total: ${total.toLocaleString()} IQD*`,
+    ``,`📍 Pickup / Dine-in`
+  ].join('\n');
+  const encoded=encodeURIComponent(msg);
+  window.open(`https://wa.me/${CFG.wa}?text=${encoded}`,'_blank');
+  toast('📱 Opening WhatsApp...');
+  clearCart();closeCart();
+}
+
+// HOURS
+function renderHours(){
+  const list=$('hoursList');
+  if(!list)return;
+  const today=new Date().getDay();
+  const days=L[lang].days;
+  list.innerHTML=HOURS.map(h=>{
+    const isToday=h.day===today;
+    return`<div class="hrs-row${isToday?' today':''}">
+      <span class="hrs-day">${days[h.day]}${isToday?`<span class="today-badge">${L[lang].today_b||'Today'}</span>`:''}</span>
+      <span class="hrs-time">${h.o} – ${h.c}</span>
+    </div>`;
+  }).join('');
+}
+
+// PRODUCT MODAL
+function openProduct(item){
+  curProduct=item;curQty=1;
+  const n=item.name[lang]||item.name.en;
+  const d=item.desc[lang]||item.desc.en;
+  $('psImg').src=item.img;$('psImg').alt=n;
+  $('psName').textContent=n;
+  $('psPrice').textContent=`${item.price.toLocaleString()} IQD`;
+  $('psDesc').textContent=d;
+  $('qNum').textContent=curQty;
+  $('prodModal').classList.add('on');
+  document.body.style.overflow='hidden';
+}
+function closeProduct(){
+  $('prodModal').classList.remove('on');
+  document.body.style.overflow='';
+}
+
+// CART DRAWER
+function openCart(){$('cartDrawer').classList.add('on');$('cartOv').classList.add('on');document.body.style.overflow='hidden';renderCart()}
+function closeCart(){$('cartDrawer').classList.remove('on');$('cartOv').classList.remove('on');document.body.style.overflow=''}
+
+// HOURS MODAL
+function openHours(){renderHours();$('hoursModal').classList.add('on');document.body.style.overflow='hidden'}
+function closeHours(){$('hoursModal').classList.remove('on');document.body.style.overflow=''}
+
+// REVIEWS
+function renderReviews(){
+  const grid=$('revGrid');
+  grid.innerHTML=REVIEWS.map((r,i)=>`
+    <div class="rev-card" style="transition-delay:${i*80}ms">
+      <div class="rev-stars">${'★'.repeat(r.stars)}</div>
+      <p class="rev-txt">"${r.text}"</p>
+      <div class="rev-auth">
+        <div class="rev-av">${r.i}</div>
+        <div><div class="rev-name">${r.name}</div><div class="rev-date">${r.date}</div></div>
+      </div>
+    </div>`).join('');
+  setTimeout(()=>grid.querySelectorAll('.rev-card').forEach((c,i)=>setTimeout(()=>c.classList.add('revealed'),i*80)),100);
+}
+
+// TOAST
+function toast(msg){
+  const c=$('toastC');
+  const el=document.createElement('div');
+  el.className='toast';el.textContent=msg;
+  c.appendChild(el);
+  setTimeout(()=>{el.classList.add('out');setTimeout(()=>el.remove(),350)},2400);
+}
+
+// SCROLL REVEAL
+function setupScrollReveal(){
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('revealed')});
+  },{threshold:.12});
+  document.querySelectorAll('.m-card,.rev-card').forEach(el=>obs.observe(el));
+}
+
+// EVENTS
+document.querySelectorAll('.cat-btn').forEach(b=>b.addEventListener('click',()=>filterCat(b.dataset.cat)));
+document.querySelectorAll('.lang-btn').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
+$('cartBtn').addEventListener('click',openCart);
+$('cartOv').addEventListener('click',closeCart);
+$('cartClose').addEventListener('click',closeCart);
+$('checkoutBtn').addEventListener('click',checkout);
+$('clearBtn').addEventListener('click',clearCart);
+$('hoursBtn').addEventListener('click',openHours);
+$('hoursBtn2').addEventListener('click',openHours);
+$('fHoursBtn').addEventListener('click',openHours);
+$('hoursClose').addEventListener('click',closeHours);
+$('hoursModal').addEventListener('click',e=>{if(e.target===$('hoursModal'))closeHours()});
+$('prodClose').addEventListener('click',closeProduct);
+$('prodModal').addEventListener('click',e=>{if(e.target===$('prodModal'))closeProduct()});
+$('qDec').addEventListener('click',()=>{if(curQty>1){curQty--;$('qNum').textContent=curQty}});
+$('qInc').addEventListener('click',()=>{curQty++;$('qNum').textContent=curQty});
+$('psAdd').addEventListener('click',()=>{if(curProduct){addToCart(curProduct,curQty);closeProduct()}});
+$('waFooter').addEventListener('click',()=>window.open(`https://wa.me/${CFG.wa}?text=Hello%20Twin%20Coffee!`,'_blank'));
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    closeProduct();closeCart();closeHours();
+  }
+});
+
+// INIT
+renderMenu();
+renderReviews();
+renderHours();
+updateBadge();
+setTimeout(setupScrollReveal,300);
+</script>
+</body>
+</html>
